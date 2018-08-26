@@ -1,23 +1,36 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import CheckInDialog from './CheckInDialog';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-          <button onClick={this.props.getUsers}>getUsers</button>
-          <div>data: {this.props.userName}</div>
-      </div>
-    );
-  }
+    state = {
+        isCheckInDialogOpen: false,
+    };
+
+    handleClick = () => {
+        this.setState({
+            isCheckInDialogOpen: true,
+        });
+    };
+
+    handleCheckInDialogClose = () => {
+        this.setState({
+            isCheckInDialogOpen: false,
+        });
+    }
+
+    render() {
+        return (
+            <div className="App">
+                <CheckInDialog
+                    isOpen={this.state.isCheckInDialogOpen}
+                    handleClose={this.handleCheckInDialogClose}
+                />
+
+                <button onClick={this.handleClick}>getUsers</button>
+            </div>
+        );
+    }
 }
 
 export default App;
