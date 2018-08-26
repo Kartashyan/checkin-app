@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import {Link} from "react-router-dom";
 
-const styles = {
+const styles = theme => ({
     root: {
         flexGrow: 1,
     },
@@ -19,7 +19,10 @@ const styles = {
         marginLeft: -12,
         marginRight: 20,
     },
-};
+    menuLink: {
+        marginRight: theme.spacing.unit,
+    }
+});
 
 function ButtonAppBar(props) {
     const { classes } = props;
@@ -34,7 +37,10 @@ function ButtonAppBar(props) {
                         News
                     </Typography>
                     <Link to='/login'>
-                        <Button color="inherit">Login</Button>
+                        <Button variant="outlined" color="inherit" className={classes.menuLink}>Login</Button>
+                    </Link>
+                    <Link to='/register'>
+                        <Button variant="outlined" color="inherit" className={classes.menuLink}>Register</Button>
                     </Link>
                 </Toolbar>
             </AppBar>

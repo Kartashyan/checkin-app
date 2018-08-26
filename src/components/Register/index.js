@@ -20,6 +20,7 @@ const styles = theme => ({
 
 class TextFields extends React.Component {
     state = {
+        userName: '',
         email: '',
         password: '',
     };
@@ -35,6 +36,16 @@ class TextFields extends React.Component {
 
         return (
             <form className={classes.container} noValidate autoComplete="off">
+                <TextField
+                    required
+                    id="userName"
+                    label="Name"
+                    className={classes.textField}
+                    value={this.state.userName}
+                    onChange={this.handleChange('userName')}
+                    margin="normal"
+                />
+
                 <TextField
                     required
                     id="email"
@@ -63,7 +74,7 @@ class TextFields extends React.Component {
                     color="primary"
                     className={classes.button}
                 >
-                    Login
+                    Register
                 </Button>
             </form>
         );

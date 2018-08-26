@@ -12,6 +12,7 @@ import {Provider} from 'react-redux'
 import {Route} from "react-router";
 import {BrowserRouter} from 'react-router-dom'
 import Login from "./components/Login";
+import Register from "./components/Register";
 import TopBar from "./components/TopBar";
 
 import registerServiceWorker from './registerServiceWorker';
@@ -27,6 +28,7 @@ ReactDOM.render(
                 <TopBar/>
                 <Route exact path='/' component={App} />
                 <Route path='/login' component={Login} />
+                <Route path='/register' component={Register} />
             </div>
         </BrowserRouter>
     </Provider>,
