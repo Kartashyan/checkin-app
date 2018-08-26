@@ -18,16 +18,28 @@ const styles = theme => ({
     },
 });
 
-class TextFields extends React.Component {
-    state = {
-        email: '',
-        password: '',
-    };
+export class TextFields extends React.Component {
+
+    constructor(props) {
+        super(props);
+        console.log(props);
+        this.state = {
+            email: '',
+            password: '',
+        };
+    }
 
     handleChange = fieladName => event => {
         this.setState({
             [fieladName]: event.target.value,
         });
+    };
+
+    handleSignIn = () => {
+        const {email, password} = this.state;
+        const {signIn} =this. props;
+        console.log(this.props);
+        signIn(email, password);
     };
 
     render() {
@@ -62,7 +74,7 @@ class TextFields extends React.Component {
                     variant="contained"
                     color="primary"
                     className={classes.button}
-                >
+                    onClick={this.handleSignIn}>
                     Login
                 </Button>
             </form>

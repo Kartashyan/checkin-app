@@ -19,11 +19,14 @@ const styles = theme => ({
 });
 
 class TextFields extends React.Component {
-    state = {
-        userName: '',
-        email: '',
-        password: '',
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            userName: '',
+            email: '',
+            password: '',
+        };
+    }
 
     handleChange = fieladName => event => {
         this.setState({
@@ -31,21 +34,17 @@ class TextFields extends React.Component {
         });
     };
 
+    handleSignUp = () => {
+        const {email, password} = this.state;
+        const {signUp} = this.props;
+        signUp(email, password);
+    };
+
     render() {
         const { classes } = this.props;
 
         return (
             <form className={classes.container} noValidate autoComplete="off">
-                <TextField
-                    required
-                    id="userName"
-                    label="Name"
-                    className={classes.textField}
-                    value={this.state.userName}
-                    onChange={this.handleChange('userName')}
-                    margin="normal"
-                />
-
                 <TextField
                     required
                     id="email"
@@ -73,6 +72,7 @@ class TextFields extends React.Component {
                     variant="contained"
                     color="primary"
                     className={classes.button}
+                onClick={this.handleSignUp}
                 >
                     Register
                 </Button>
