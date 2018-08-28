@@ -10,3 +10,4 @@ const firebaseConfig = {
 };
 
 export const firebaseApp = firebase.initializeApp(firebaseConfig);
+export const markersRef = firebase.database().ref('markers');

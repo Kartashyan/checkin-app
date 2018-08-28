@@ -1,24 +1,30 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
+import {submitData} from "../../actionCreators/asyncCalls";
 
 const styles = theme => ({
     container: {
         display: 'flex',
-        flexWrap: 'wrap',
         flexDirection: 'column',
         alignItems: 'center',
+        height: '250px',
+        width: 300
     },
     textField: {
-        width: 200,
+        width: 300,
+    },
+    selectField: {
+        width: 300,
+        marginTop: 16,
+        marginBottom: 16,
     },
     input: {
         display: 'none',
@@ -28,24 +34,33 @@ const styles = theme => ({
     },
 });
 
-const defaultState = {
-    title: '',
-    description: '',
-    rating: null,
-    photos: [],
-};
 
-class CheckInDialog extends React.Component {
-    state = defaultState;
 
-    handleChange = fieldName => event => {
-        this.setState({
-            [fieldName]: event.target.value,
-        });
+class CheckInDialog extends Component {
+    constructor() {
+        super();
+        this.state = {
+            title: '',
+            description: '',
+            rating: 0,
+            photos: [],
+        };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSave = this.handleSave.bind(this);
+    }
+    handleChange(fieldName) {
+        return event => {
+            this.setState({
+                [fieldName]: event.target.value,
+            });
+        }
     };
 
-    handleSave = () => {
-        this.props.handleClose();
+    handleSave() {
+        const {lat, lng} = this.props;
+        const {title, description, rating} = this.state;
+
+        this.props.submitData(title, description, rating, lat, lng);
     };
 
     render() {
@@ -60,8 +75,7 @@ class CheckInDialog extends React.Component {
             >
                 <DialogTitle id="alert-dialog-title">Check in</DialogTitle>
 
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-description" className={classes.container}>
+                <DialogContent id="alert-dialog-description" className={classes.container}>
                         <TextField
                             required
                             id="title"
@@ -87,7 +101,7 @@ class CheckInDialog extends React.Component {
                             value={this.state.rating}
                             onChange={this.handleChange('rating')}
                             name="rating"
-                            className={classes.textField}
+                            className={classes.selectField}
                         >
                             <MenuItem value="" disabled>
                                 Rate this place
@@ -114,7 +128,6 @@ class CheckInDialog extends React.Component {
                                 Upload photos
                             </Button>
                         </label>
-                    </DialogContentText>
                 </DialogContent>
 
                 <DialogActions>

@@ -1,5 +1,11 @@
 .App {
   text-align: center;
+  height: 100%;
+}
+
+.map-wrapper {
+  width: 80%;
+  height: 70%;
 }
 
 .App-logo {

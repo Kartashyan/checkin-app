@@ -1,9 +1,11 @@
 import {combineReducers} from 'redux'
-import user from "./user";
+import markers from "./markers";
+import checkinDialog from "./checkinDialog";
 
 
 const reducer = combineReducers({
-    user
+    markers,
+    checkinDialog
 });
 
 

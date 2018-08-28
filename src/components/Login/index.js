@@ -37,8 +37,7 @@ export class TextFields extends React.Component {
 
     handleSignIn = () => {
         const {email, password} = this.state;
-        const {signIn} =this. props;
-        console.log(this.props);
+        const {signIn}=this.props;
         signIn(email, password);
     };
 
