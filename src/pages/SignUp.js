@@ -3,7 +3,7 @@ import TextField from "@material-ui/core/TextField/TextField";
 import Button from "@material-ui/core/Button/Button";
 import CssBaseline from "@material-ui/core/CssBaseline/CssBaseline";
 import Paper from "@material-ui/core/Paper/Paper";
-import {Link, withRouter} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import {withStyles} from "@material-ui/core";
 
 import * as routes from "../constants/routes";
@@ -158,14 +158,6 @@ class SignUpForm extends PureComponent {
     }
 }
 
-
-const SignUpLink = () =>
-    <p>
-        Don't have an account?
-        {' '}
-        <Link to={routes.SIGN_UP}>Sign Up</Link>
-    </p>;
-
 const StyledSignUpForm = withStyles(styles)(SignUpForm);
 
 const SignUpPage = ({ history }) =>
@@ -177,5 +169,4 @@ export default withRouter(SignUpPage);
 
 export {
     SignUpForm,
-    SignUpLink,
 };

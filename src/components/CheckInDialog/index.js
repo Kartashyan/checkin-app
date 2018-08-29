@@ -34,17 +34,17 @@ const styles = theme => ({
     },
 });
 
-
+const INITIAL_STATE = {
+        title: '',
+        description: '',
+        rating: 0,
+        photos: [],
+    };
 
 class CheckInDialog extends PureComponent {
     constructor() {
         super();
-        this.state = {
-            title: '',
-            description: '',
-            rating: 0,
-            photos: [],
-        };
+        this.state = {...INITIAL_STATE};
         this.handleChange = this.handleChange.bind(this);
         this.handleSave = this.handleSave.bind(this);
     }
@@ -61,6 +61,8 @@ class CheckInDialog extends PureComponent {
         const {title, description, rating} = this.state;
 
         this.props.submitData(title, description, rating, lat, lng);
+
+        this.setState(INITIAL_STATE);
     };
 
     render() {
