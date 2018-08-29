@@ -2,11 +2,15 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Home from '../components/App';
 import {getUsers, submitData} from "../actionCreators/asyncCalls";
-import {closeDialog} from "../actionCreators/directCalls";
+import {closeCardDialog, closeDialog, showMarkerInfo} from "../actionCreators/directCalls";
 
 const mapStateToProps = (state, ownProps) => {
     return {
         isCheckInDialogOpen: state.checkinDialog.isCheckInDialogOpen,
+        isCardDialogOpen: state.cardDialog.isCardDialogOpen,
+        cardTitle: state.cardDialog.cardTitle,
+        cardDescription: state.cardDialog.cardDescription,
+        cardRating: state.cardDialog.cardRating,
         lat: state.checkinDialog.lat,
         lng: state.checkinDialog.lng,
         markers: state.markers
@@ -17,7 +21,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return bindActionCreators({
         getUsers,
         submitData,
-        closeDialog
+        closeDialog,
+        closeCardDialog,
+        showMarkerInfo
     }, dispatch);
 };
 

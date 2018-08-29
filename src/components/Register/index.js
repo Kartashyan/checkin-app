@@ -18,7 +18,7 @@ const styles = theme => ({
     },
 });
 
-class TextFields extends React.Component {
+class TextFields extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {

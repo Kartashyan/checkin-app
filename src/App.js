@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {BrowserRouter as Router, Route } from 'react-router-dom';
-import Navigation from "./Navigation/Navigation";
+import Navigation from "./components/Navigation/Navigation";
 import * as routes from "./constants/routes";
 import LandingPage from "./pages/Landing";
 import SignUpPage from "./pages/SignUp";
@@ -11,7 +11,7 @@ import AccountPage from "./pages/Account";
 import {firebaseApp} from "./firebase";
 
 
-export default class App extends Component {
+export default class App extends PureComponent {
     constructor(props) {
         super(props);
 

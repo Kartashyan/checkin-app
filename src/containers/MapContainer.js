@@ -2,7 +2,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {signIn} from "../actionCreators/asyncCalls";
 import Map from "../components/Map"
-import {onMarkerClick, setMarkers} from "../actionCreators/directCalls";
+import {onMarkerClick, onMapClick, setMarkers, showMarkerInfo} from "../actionCreators/directCalls";
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -13,7 +13,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return bindActionCreators({
         signIn,
         setMarkers,
-        onMarkerClick
+        onMarkerClick,
+        onMapClick,
+        showMarkerInfo
     }, dispatch);
 };
 

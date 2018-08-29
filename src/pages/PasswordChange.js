@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import { firebaseApp } from '../firebase';
 
@@ -8,7 +8,7 @@ const INITIAL_STATE = {
     error: null,
 };
 
-class PasswordChangeForm extends Component {
+class PasswordChangeForm extends PureComponent {
     constructor(props) {
         super(props);
 

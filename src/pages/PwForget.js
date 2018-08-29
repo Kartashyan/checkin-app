@@ -1,22 +1,13 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { PureComponent } from 'react';
 
 import { firebaseApp } from '../firebase';
-import * as routes from '../constants/routes';
-
-const PasswordForgetPage = () =>
-    <div>
-        <h1>PasswordForget</h1>
-        <PasswordForgetForm />
-    </div>;
-
 
 const INITIAL_STATE = {
     email: '',
     error: null,
 };
 
-class PasswordForgetForm extends Component {
+class PasswordForgetForm extends PureComponent {
     constructor(props) {
         super(props);
 
@@ -73,14 +64,13 @@ class PasswordForgetForm extends Component {
     }
 }
 
-const PasswordForgetLink = () =>
-    <p>
-        <Link to={routes.PASSWORD_FORGET}>Forgot Password?</Link>
-    </p>;
+const PasswordForgetPage = () =>
+    <div>
+        <PasswordForgetForm />
+    </div>;
 
 export default PasswordForgetPage;
 
 export {
     PasswordForgetForm,
-    PasswordForgetLink,
 };

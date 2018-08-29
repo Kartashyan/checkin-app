@@ -2,15 +2,16 @@ import React from "react";
 import {firebaseApp} from "../firebase";
 
 export default function withAuthorization(Component) {
-    return class WithAuthorization extends React.Component {
+    return class WithAuthorization extends React.PureComponent {
         constructor(){
             super();
             this.state = {
-                isAuthUser: null
+                isAuthUser: null,
+                unsubscribe: null,
             }
         }
         componentDidMount() {
-            firebaseApp.auth().onAuthStateChanged(authUser => {
+            const unsubscribe = firebaseApp.auth().onAuthStateChanged(authUser => {
                 if (!authUser) {
                     this.setState({isAuthUser: null});
                     // this.props.history.push(routes.SIGN_IN);
@@ -18,6 +19,11 @@ export default function withAuthorization(Component) {
                     this.setState({isAuthUser: authUser.email});
                 }
             });
+            this.setState({unsubscribe})
+        }
+
+        componentWillUnmount() {
+            this.state.unsubscribe();
         }
 
         render() {

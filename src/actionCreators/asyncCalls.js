@@ -18,3 +18,4 @@ export function submitData(title, description, rating, lat, lng) {
 export function getMarkers() {
     return {type: actionTypes.GET_MARKERS, title: 1}
 }
+

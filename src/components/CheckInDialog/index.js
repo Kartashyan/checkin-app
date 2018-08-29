@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -8,21 +8,21 @@ import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
-import {submitData} from "../../actionCreators/asyncCalls";
 
 const styles = theme => ({
     container: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        height: '250px',
         width: 300
     },
     textField: {
         width: 300,
+        minHeight: 50,
     },
     selectField: {
         width: 300,
+        minHeight: 50,
         marginTop: 16,
         marginBottom: 16,
     },
@@ -36,7 +36,7 @@ const styles = theme => ({
 
 
 
-class CheckInDialog extends Component {
+class CheckInDialog extends PureComponent {
     constructor() {
         super();
         this.state = {
@@ -70,6 +70,7 @@ class CheckInDialog extends Component {
             <Dialog
                 open={this.props.isOpen}
                 onClose={this.handleClose}
+                className={classes.dialog}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >

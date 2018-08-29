@@ -1,29 +1,16 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import './App.css';
 import CheckInDialog from './CheckInDialog';
+import CardDialog from './CardDialog';
 import Map from "../containers/MapContainer";
-import {submitData} from "../actionCreators/asyncCalls";
-import {firebaseApp} from "../firebase";
 
-export default class Home extends Component {
+export default class Home extends PureComponent {
     constructor() {
         super();
         this.state = {
             isSignin: false
         };
         this.handleClick = this.handleClick.bind(this);
-        this.handleCheckInDialogClose = this.handleCheckInDialogClose.bind(this);
-    }
-
-    componentDidMount() {
-        firebaseApp.auth().onAuthStateChanged(user=> {
-            if(user){
-                this.setState({isSignin: true});
-            }
-            else {
-                this.setState({isSignin: false})
-            }
-        });
     }
 
     handleClick() {
@@ -32,22 +19,24 @@ export default class Home extends Component {
         });
     };
 
-    handleCheckInDialogClose() {
-        this.props.closeDialog();
-    };
-
     render() {
         return (
             <div className="App">
                 <CheckInDialog
                     isOpen={this.props.isCheckInDialogOpen}
-                    handleClose={this.handleCheckInDialogClose}
+                    handleClose={this.props.closeDialog}
                     lat={this.props.lat}
                     lng={this.props.lng}
                     submitData={this.props.submitData}
                 />
-                {!this.isSignin && <Map/>}
-
+                <CardDialog
+                    isOpen={this.props.isCardDialogOpen}
+                    handleClose={this.props.closeCardDialog}
+                    title={this.props.cardTitle}
+                    description={this.props.cardDescription}
+                    rating={this.props.cardRating}
+                />
+                <Map showMediaCard={this.props.showMarkerInfo}/>
                 <button onClick={this.handleClick}>getUsers</button>
             </div>
         );
