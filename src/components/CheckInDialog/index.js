@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
+import {storageRef} from "../../firebase";
 
 const styles = theme => ({
     container: {
@@ -38,6 +39,7 @@ const INITIAL_STATE = {
         title: '',
         description: '',
         rating: 0,
+        file: null,
         photos: [],
     };
 
@@ -47,7 +49,9 @@ class CheckInDialog extends PureComponent {
         this.state = {...INITIAL_STATE};
         this.handleChange = this.handleChange.bind(this);
         this.handleSave = this.handleSave.bind(this);
+        this.handleImageUpload = this.handleImageUpload.bind(this);
     }
+
     handleChange(fieldName) {
         return event => {
             this.setState({
@@ -56,11 +60,30 @@ class CheckInDialog extends PureComponent {
         }
     };
 
+    handleImageUpload(e) {
+        const imageRefs = Object.values(e.target.files).map((file) => {
+            return {
+                imageRef: storageRef.child(`markers/image-${file.name}.jpg`),
+                file,
+            }
+        });
+        Promise.all(imageRefs.map((fileObj) => {
+            return fileObj.imageRef.put(fileObj.file);
+        })).then(() => {
+            return Promise.all(imageRefs.map((imageRefObj) => {
+                return imageRefObj.imageRef.getDownloadURL();
+            }));
+        }).then(urls => {
+            console.log(urls);
+            this.setState({photos: urls})
+        });
+    }
+
     handleSave() {
         const {lat, lng} = this.props;
-        const {title, description, rating} = this.state;
+        const {title, description, rating, photos} = this.state;
 
-        this.props.submitData(title, description, rating, lat, lng);
+        this.props.submitData(title, description, rating, photos, lat, lng);
 
         this.setState(INITIAL_STATE);
     };
@@ -121,9 +144,9 @@ class CheckInDialog extends PureComponent {
                             multiple
                             accept="image/*"
                             className={classes.input}
+                            onChange={this.handleImageUpload}
                             id="contained-button-file"
                             type="file"
-                            onChange={this.handleChange('photos')}
                         />
 
                         <label htmlFor="contained-button-file">

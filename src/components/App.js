@@ -10,14 +10,7 @@ export default class Home extends PureComponent {
         this.state = {
             isSignin: false
         };
-        this.handleClick = this.handleClick.bind(this);
     }
-
-    handleClick() {
-        this.setState({
-            isCheckInDialogOpen: true,
-        });
-    };
 
     render() {
         return (
@@ -34,10 +27,10 @@ export default class Home extends PureComponent {
                     handleClose={this.props.closeCardDialog}
                     title={this.props.cardTitle}
                     description={this.props.cardDescription}
+                    photos={this.props.cardPhotos}
                     rating={this.props.cardRating}
                 />
                 <Map showMediaCard={this.props.showMarkerInfo}/>
-                <button onClick={this.handleClick}>getUsers</button>
             </div>
         );
     }

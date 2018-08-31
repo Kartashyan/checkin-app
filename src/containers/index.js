@@ -11,6 +11,7 @@ const mapStateToProps = (state, ownProps) => {
         cardTitle: state.cardDialog.cardTitle,
         cardDescription: state.cardDialog.cardDescription,
         cardRating: state.cardDialog.cardRating,
+        cardPhotos: state.cardDialog.cardPhotos,
         lat: state.checkinDialog.lat,
         lng: state.checkinDialog.lng,
         markers: state.markers

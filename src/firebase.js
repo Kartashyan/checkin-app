@@ -5,9 +5,10 @@ const firebaseConfig = {
     authDomain: "checkin-app-255d2.firebaseapp.com",
     databaseURL: "https://checkin-app-255d2.firebaseio.com",
     projectId: "checkin-app-255d2",
-    storageBucket: "",
+    storageBucket: "gs://checkin-app-255d2.appspot.com",
     messagingSenderId: "421754550232"
 };
 
 export const firebaseApp = firebase.initializeApp(firebaseConfig);
 export const markersRef = firebase.database().ref('markers');
+export const storageRef = firebase.storage().ref();

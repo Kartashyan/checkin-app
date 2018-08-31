@@ -15,8 +15,8 @@ export class MapContainer extends PureComponent {
     }
 
     onMarkerClick(e) {
-       const {title, description, rating} = e;
-        this.props.showMarkerInfo(title, description, rating);
+       const {title, description, rating, photos} = e;
+        this.props.showMarkerInfo(title, description, rating, photos);
         console.log(e);
     }
 
@@ -41,13 +41,14 @@ export class MapContainer extends PureComponent {
                 title={marker.title}
                 description={marker.description}
                 rating={marker.rating}
+                photos={marker.photos}
                 position={{lat: marker.lat, lng: marker.lng}} />
         })
     }
 
     onMapClick(mapProps, map, clickEvent) {
         const {lat, lng} = clickEvent.latLng;
-        this.props.onMapClick(lat(), lng());/*todo change name*/
+        this.props.onMapClick(lat(), lng());
         this.setState({
             lat: lat(),
             lng: lng(),

@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Dialog from "@material-ui/core/Dialog/Dialog";
 import CssBaseline from "@material-ui/core/CssBaseline/CssBaseline";
+import CardMedia from "@material-ui/core/CardMedia/CardMedia";
 
 const styles = {
     container: {
@@ -36,7 +37,7 @@ const styles = {
 class MediaCard extends React.PureComponent {
 
     render() {
-        const { classes, title, description, rating, isOpen} = this.props;
+        const { classes, title, description, rating, photos, isOpen} = this.props;
         return (
             <Dialog
                 open={isOpen}
@@ -44,6 +45,11 @@ class MediaCard extends React.PureComponent {
                 className={classes.container}>
                 <Card className={classes.card}>
                     <CardContent className={classes.cardContent}>
+                        <CardMedia
+                            className={classes.media}
+                            image={photos[0]}
+                            title="Marked photos"
+                        />
                         <Typography gutterBottom variant="headline" component="h2">
                             {title}
                         </Typography>

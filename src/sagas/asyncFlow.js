@@ -5,9 +5,9 @@ import {markersRef} from "../firebase";
 
 import * as asyncActionTypes from '../actionTypes/async'
 
-function* submitData({title, description, rating, lat, lng}) {
+function* submitData({title, description, rating, photos, lat, lng}) {
     try {
-        yield markersRef.push({title, description, rating, lat, lng});
+        yield markersRef.push({title, description, rating, photos, lat, lng});
         yield put(closeDialog());
 
     } catch (e) {
