@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Dialog from "@material-ui/core/Dialog/Dialog";
 import CssBaseline from "@material-ui/core/CssBaseline/CssBaseline";
 import CardMedia from "@material-ui/core/CardMedia/CardMedia";
+import SwipeableStepper from "../Slider";
 
 const styles = {
     container: {
@@ -45,11 +46,12 @@ class MediaCard extends React.PureComponent {
                 className={classes.container}>
                 <Card className={classes.card}>
                     <CardContent className={classes.cardContent}>
-                        <CardMedia
-                            className={classes.media}
-                            image={photos[0]}
-                            title="Marked photos"
-                        />
+                        <SwipeableStepper imageSteps={photos}/>
+                        {/*<CardMedia*/}
+                            {/*className={classes.media}*/}
+                            {/*image={photos[0]}*/}
+                            {/*title="Marked photos"*/}
+                        {/*/>*/}
                         <Typography gutterBottom variant="headline" component="h2">
                             {title}
                         </Typography>
